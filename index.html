@@ -34,43 +34,64 @@
             100% { transform: rotate(360deg); }
         }
         #base {
+            align-items: center;
             text-align: center;
-        }
-        button.free {
-            background-color: #4aee4a;
-        }
-        button.frozen {
-            background-color: #4aee4a;
-        }
-        button.sold {
-            background-color: #ff0000;
         }
         button {
             width: 100%;
             height: auto;
-            /* padding-bottom: 70%; */
             border-radius: 50%;
             font-size: 1.4em;
             align-items: center;
             justify-content: center;
             text-align: center;
-            /* line-height: 100%; */
             display: flex;
-            /* position: relative; */
             padding-top: 0.7em;
             padding-bottom: 0.7em;
+        }
+        button.free {
+            background-color: #5df35d;
+        }
+        button.frozen {
+            background-color: #5df35d;
+        }
+        button.sold {
+            background-color: #ff0000;
+        }
+        button.btZap {
+            background-color: #20ee20;
+            width: 280px;
+            height: auto;
+            font-size: 1.5em;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+            border-radius: 0;
+            margin: 0 auto;
+            cursor: pointer;
         }
     </style>
 </head>
     <body>
         <div id="titulo">
-            <h1>Aqui é uma página de teste</h1>
-            <p>Para a rifa de seu Miguel</p>
+            <h1>Rifa para ajudar com os medicamentos de Seu Miguel</h1>
+            <h2>Serão feitos 4 sorteios com os serguintes prêmios:</h2>
+            <h2>1 - Argola de ouro 24k:<br>
+                2 - ?????<br>
+                3 - ?????<br>
+                4 - ?????</h2>
+            <h2>Data do sorteio: 05/08/2023 sábado.</h2>
+            <h2>Escolha um ou mais números abaixo e entre em contato conosco pelo WhatsApp.<br>
+                Cada número da rifa tem o valor simbílico de R$ 10,00.<br>
+                Os números vermelhos já foram comprados.</h2>
         </div>
         <div class="loader" id="loader"></div>
         <div id="tabela" class="tabela"></div>
         <div id="base">
-            <p>arqui ficará abaixo do div</p>
+            <h2>Agradecimenos muito por sua contribuição!</h2>
+            <button class="btZap" onclick="btZapClick()">Chamar no WhatsApp</button>
         </div>
     </body>
     <script>
@@ -112,6 +133,15 @@
             newButon.id = "button_number";
             newButon.className = status;
             return newButon;
+        }
+        function btZapClick() {
+            var numeroTelefone = "5584988054083";
+            var mensagem = "Quero comprar uma rifa para ajudar Seu Miguel Rogério."; 
+            var mensagemCodificada = encodeURIComponent(mensagem);
+
+            var linkWhatsApp = "https://api.whatsapp.com/send?phone=" + numeroTelefone + "&text=" + mensagemCodificada;
+
+            window.location.href = linkWhatsApp;
         }
     </script>
 </html>
