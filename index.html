@@ -4,6 +4,9 @@
     <title>Rifa Seu Miguel</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
+        :root {
+            --espac: 4px;
+        }
         body {
             background-color: #F6F8F7;
         }
@@ -12,6 +15,10 @@
         }
         #tabela {
             text-align: center;
+            display: grid;
+            grid-template-columns: repeat(10, minmax(70px, 1fr));
+            gap: var(--espac);
+            width: 100%;
         }
         #base {
             text-align: center;
@@ -26,13 +33,19 @@
             background-color: #ff0000;
         }
         button {
-            width: 9%;
+            width: 100%;
+            height: auto;
+            /* padding-bottom: 70%; */
             border-radius: 50%;
-            font-size: 1em;
+            font-size: 1.4em;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            line-height: 1;
-            margin: 2px;
-            display: inline-block;
+            /* line-height: 100%; */
+            display: flex;
+            /* position: relative; */
+            padding-top: 0.7em;
+            padding-bottom: 0.7em;
         }
     </style>
 </head>
