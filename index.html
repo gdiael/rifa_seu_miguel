@@ -20,6 +20,19 @@
             gap: var(--espac);
             width: 100%;
         }
+        .loader {
+            margin: auto;
+            border: 10px solid #EAF0F6;
+            border-radius: 50%;
+            border-top: 10px solid #FF7A59;
+            width: 100px;
+            height: 100px;
+            animation: spinner 4s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         #base {
             text-align: center;
         }
@@ -54,7 +67,8 @@
             <h1>Aqui é uma página de teste</h1>
             <p>Para a rifa de seu Miguel</p>
         </div>
-        <div id="tabela"></div>
+        <div class="loader" id="loader"></div>
+        <div id="tabela" class="tabela"></div>
         <div id="base">
             <p>arqui ficará abaixo do div</p>
         </div>
@@ -90,6 +104,7 @@
         function updateTable(jsonData) {
             tabela = document.getElementById("tabela");
             jsonData.forEach(obj => {tabela.appendChild(buttonFactory(obj.number, obj.status))});
+            document.getElementById('loader').style.display = "none";
         }
         function buttonFactory(number, status) {
             var newButon = document.createElement("button");
