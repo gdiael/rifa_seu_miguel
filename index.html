@@ -51,23 +51,32 @@
             domLoadCallback();
         });
         function domLoadCallback() {
-            tabela = document.getElementById("tabela");
-            getNumbersInfo().forEach(obj => {tabela.appendChild(buttonFactory(obj.number, obj.status))});
+            getNumbersInfo();
         }
         function getNumbersInfo() {
-            const jsonData = [
-                                { number: 1, status: 'free' },
-                                { number: 2, status: 'frozen' },
-                                { number: 3, status: 'sold' },
-                                { number: 4, status: 'free' },
-                                { number: 5, status: 'frozen' },
-                                { number: 6, status: 'sold' },
-                                { number: 7, status: 'free' },
-                                { number: 8, status: 'frozen' },
-                                { number: 9, status: 'sold' },
-                                { number: 10, status: 'free' },
-                            ];
-            return jsonData;
+            const appUrl = 'https://script.google.com/macros/s/AKfycbxYaBmMncj8bV2bvvvNYaoD0OF6Oab-gvjWSIpEclIH3Bgo0X4DtQLdgu3LOCM7rC_9/exec'
+            fetch(appUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(data);
+                    updateTable(data);
+                })
+                .catch(error => {
+                    console.error("Ocorreu um erro na requisição:", error);
+                    var jsonData;
+                    for (var i = 1; i < 501; i++) {
+                        var item = {
+                        number: i,
+                        status: 'free'
+                        };
+                        jsonData.push(item);
+                    }
+                    updateTable(jsonData);
+                });
+        }
+        function updateTable(jsonData) {
+            tabela = document.getElementById("tabela");
+            jsonData.forEach(obj => {tabela.appendChild(buttonFactory(obj.number, obj.status))});
         }
         function buttonFactory(number, status) {
             var newButon = document.createElement("button");
