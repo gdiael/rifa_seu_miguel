@@ -1,13 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rifa Seu Miguel</title>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>Rifa Seu Miguel</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {
+            background-color: #F6F8F7;
+        }
+        button.free {
+            background-color: #4aee4a;
+        }
+        button.frozen {
+            background-color: #4aee4a;
+        }
+        button.sold {
+            background-color: #ff0000;
+        }
+        button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 16px;
+            text-align: center;
+            margin: 2px;
+        }
+    </style>
 </head>
     <body>
+        <h1>Aqui é uma página de teste</h1>
+        <p>Para a rifa de seu Miguel</p>
+        <div id="tabela">
 
-    <h1>Aqui é uma página de teste</h1>
-    <p>Para a rifa de seu Miguel</p>
-
+        </div>
     </body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            domLoadCallback();
+        });
+        function domLoadCallback() {
+            tabela = document.getElementById("tabela");
+            getNumbersInfo().forEach(obj => {tabela.appendChild(buttonFactory(obj.number, obj.status))});
+        }
+        function getNumbersInfo() {
+            const jsonData = [
+                                { number: 1, status: 'free' },
+                                { number: 2, status: 'frozen' },
+                                { number: 3, status: 'sold' },
+                                { number: 4, status: 'free' },
+                                { number: 5, status: 'frozen' },
+                                { number: 6, status: 'sold' },
+                                { number: 7, status: 'free' },
+                                { number: 8, status: 'frozen' },
+                                { number: 9, status: 'sold' },
+                                { number: 10, status: 'free' },
+                            ];
+            return jsonData;
+        }
+        function buttonFactory(number, status) {
+            var newButon = document.createElement("button");
+            newButon.textContent = number;
+            newButon.id = "button_number";
+            newButon.className = status;
+            return newButon;
+        }
+    </script>
 </html>
