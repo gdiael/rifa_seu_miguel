@@ -3,15 +3,20 @@
 <head>
     <title>Rifa Seu Miguel</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <style>
         :root {
             --espac: 4px;
         }
         body {
             background-color: #F6F8F7;
+            align-items: center;
+            text-align: center;
         }
         #titulo {
             text-align: center;
+            padding: 10px;
         }
         #tabela {
             text-align: center;
@@ -21,7 +26,9 @@
             width: 100%;
         }
         .loader {
-            margin: auto;
+            margin: 20px;
+            padding: 10px;
+            display: inline-block;
             border: 10px solid #EAF0F6;
             border-radius: 50%;
             border-top: 10px solid #FF7A59;
@@ -37,103 +44,87 @@
             align-items: center;
             text-align: center;
         }
-        button {
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            font-size: 1.4em;
+        #info {
             align-items: center;
-            justify-content: center;
             text-align: center;
-            display: flex;
-            padding-top: 0.7em;
-            padding-bottom: 0.7em;
         }
-        button.free {
-            background-color: #5df35d;
-        }
-        button.frozen {
-            background-color: #5df35d;
-        }
-        button.sold {
-            background-color: #ff0000;
-        }
-        button.btZap {
-            background-color: #20ee20;
-            width: 280px;
-            height: auto;
-            font-size: 1.5em;
+        #rifa {
+            background-color: white;
             align-items: center;
-            justify-content: center;
             text-align: center;
-            padding-top: 0.3em;
-            padding-bottom: 0.3em;
-            border-radius: 0;
-            margin: 0 auto;
-            cursor: pointer;
+            border-style: solid;
+            border-width: thin;
+            width: fit-content;
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
         }
     </style>
 </head>
     <body>
         <div id="titulo">
-            <h1>Rifa para ajudar com os medicamentos de Seu Miguel</h1>
-            <h2>Serão feitos 4 sorteios com os serguintes prêmios:</h2>
-            <h2>1 - Argola de ouro 24k:<br>
-                2 - ?????<br>
-                3 - ?????<br>
-                4 - ?????</h2>
-            <h2>Data do sorteio: 05/08/2023 sábado.</h2>
-            <h2>Escolha um ou mais números abaixo e entre em contato conosco pelo WhatsApp.<br>
-                Cada número da rifa tem o valor simbílico de R$ 10,00.<br>
-                Os números vermelhos já foram comprados.</h2>
+            <span>Rifa para ajudar Miguel Rogério em um tratamento de saúde de alto custo.</span>
         </div>
         <div class="loader" id="loader"></div>
-        <div id="tabela" class="tabela"></div>
+        <div id="info">
+            <label>Nome do comprador:</label><br>
+            <input type="text" id="nome" placeholder="Digite Seu Nome"/><br>
+            <label>Telefone:</label><br>
+            <input type="tel" id="telefone" placeholder="(00) 00000-0000" title="Digite um número de telefone válido: (00) 00000-0000"/><br>
+            <label>Quantidade de rifas:</label><br>
+            <select id="qtdrifas" name="qtdrifas">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+                <option value=7>7</option>
+                <option value=8>8</option>
+                <option value=9>9</option>
+                <option value=10>10</option>
+            </select><br>
+            <button id="btSend" class="btZap" onclick="enviarFormulario()">Gerar Rifa</button>
+        </div>
+        <div id="rifa">
+            <span>Comprovante de Rifa</span><br><br>
+            <span>Ação entre amigos para ajudar seu Miguel Rogério.</span><br>
+            <span>[MMMMM], telefone: [TTTTT],</span><br>
+            <span>comprou [CCCCC] rifas, no valor de R$ 10,00 cada.</span><br>
+            <span>Nós envie esse comprovate para dar baixa do seu pagamento.</span><br>
+            <span>Comprovante: [XXXXX]</span>
+        </div>
         <div id="base">
-            <h2>Agradecimenos muito por sua contribuição!</h2>
-            <button class="btZap" onclick="btZapClick()">Chamar no WhatsApp</button>
+            <span>Estamos dando continuidade a companha em forma de rifa,</span><br>
+            <span>pois o valor tratamento é de R$ 130.000,00 e ainda falta muito.</span><br>
+            <span>para a gente conseguir. Seguimos na luta!</span><br><br>
+            <span>Serão feitos vários sorteios com os seguintes prêmios:</span><br>
+            <span>Data do sorteio: 05/08/2023 sábado.</span><br>
+            <span>1 - Argola de ouro 24k:<br>
+                2 - ?????<br>
+                3 - ?????<br>
+                4 - ?????</span><br>
+            <span>Agradecemos muito por sua contribuição!</span>
         </div>
     </body>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            domLoadCallback();
+
+        $(document).ready(function() {
+            $("#telefone").inputmask("(99) 99999-9999");
+            $('#loader').hide();
+            $('#rifa').hide();
         });
-        function domLoadCallback() {
-            getNumbersInfo();
+
+        function stopLoad() {
+            $('#rifa').show();
+            $('#loader').hide();
         }
-        function getNumbersInfo() {
-            const appUrl = 'https://script.google.com/macros/s/AKfycbxYaBmMncj8bV2bvvvNYaoD0OF6Oab-gvjWSIpEclIH3Bgo0X4DtQLdgu3LOCM7rC_9/exec'
-            fetch(appUrl)
-                .then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    updateTable(data);
-                })
-                .catch(error => {
-                    console.error("Ocorreu um erro na requisição:", error);
-                    var jsonData;
-                    for (var i = 1; i < 501; i++) {
-                        var item = {
-                        number: i,
-                        status: 'free'
-                        };
-                        jsonData.push(item);
-                    }
-                    updateTable(jsonData);
-                });
+
+        function startLoad() {
+            $('#info').hide();
+            $('#loader').show();
         }
-        function updateTable(jsonData) {
-            tabela = document.getElementById("tabela");
-            jsonData.forEach(obj => {tabela.appendChild(buttonFactory(obj.number, obj.status))});
-            document.getElementById('loader').style.display = "none";
-        }
-        function buttonFactory(number, status) {
-            var newButon = document.createElement("button");
-            newButon.textContent = number;
-            newButon.id = "button_number";
-            newButon.className = status;
-            return newButon;
-        }
+
         function btZapClick() {
             var numeroTelefone = "5584988054083";
             var mensagem = "Quero comprar uma rifa para ajudar Seu Miguel Rogério."; 
@@ -141,7 +132,50 @@
 
             var linkWhatsApp = "https://api.whatsapp.com/send?phone=" + numeroTelefone + "&text=" + mensagemCodificada;
 
-            window.location.href = linkWhatsApp;
+            window
+            .location.href = linkWhatsApp;
+        }
+
+        function enviarFormulario() {
+            var nome = document.getElementById("nome").value;
+            var telefone = document.getElementById("telefone").value;
+            var qtdrifas = document.getElementById("qtdrifas").value;
+
+            var dados = [];
+
+            for(var i = 0; i < qtdrifas; i++) {
+                dados.push({
+                    nome: nome,
+                    telefone: telefone,
+                });
+            }
+
+            url = 'https://script.google.com/macros/s/AKfycbwgmI-90Jgr55WuWIPX1GxZaPSV52AqOIAFodB6hNQyUzyH6xuBRwT8ixnDLD7F0XfY/exec'
+
+            startLoad();
+
+            fetch(url, {
+                method: "POST",
+                redirect: "follow",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify(dados)
+            })
+            .then(response => response.json())
+            .then(data => {
+                var divResposta = document.getElementById("rifa");
+                var text = divResposta.innerHTML
+                text = text.replace("[MMMMM]", nome);
+                text = text.replace("[TTTTT]", telefone);
+                text = text.replace("[CCCCC]", qtdrifas);
+                divResposta.innerHTML = text.replace("[XXXXX]", data.codes.join(", "));
+                stopLoad();
+            })
+            .catch(error => {
+                console.error("Erro na solicitação:", error);
+                stopLoad();
+            });
         }
     </script>
 </html>
