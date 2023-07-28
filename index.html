@@ -8,12 +8,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <style>
         :root {
-            --espac: 4px;
+            --espac: 3px;
         }
         body {
+            font-family: Arial;
             background-color: #F6F8F7;
             align-items: center;
             text-align: center;
+        }
+        label {
+            margin: var(--espac);
+        }
+        input {
+            border: 1px solid black;
+            outline: none;
+            padding: calc(2 * var(--espac));
+            margin: var(--espac);
         }
         #titulo {
             text-align: center;
@@ -27,14 +37,14 @@
             width: 100%;
         }
         .loader {
-            margin: 20px;
-            padding: 10px;
+            margin: 15px;
+            padding: 7px;
             display: inline-block;
-            border: 10px solid #EAF0F6;
+            border: 7px solid #EAF0F6;
             border-radius: 50%;
-            border-top: 10px solid #FF7A59;
-            width: 100px;
-            height: 100px;
+            border-top: 7px solid #FF7A59;
+            width: 70px;
+            height: 70px;
             animation: spinner 4s linear infinite;
         }
         @keyframes spinner {
@@ -44,10 +54,15 @@
         #base {
             align-items: center;
             text-align: center;
+            width: 95%;
+            max-width: 500px;
+            margin: 0 auto;
         }
         #info {
             align-items: center;
             text-align: center;
+            display: flex;
+            flex-direction: column;
         }
         #rifa {
             background-color: white;
@@ -60,6 +75,26 @@
             margin: 10px;
             padding: 10px;
         }
+        #btSend {
+            width: 150px;
+            font-size: 1rem;
+            background-color: #779afa;
+            padding: calc(2 * var(--espac));
+            margin: calc(2 * var(--espac));
+            border: 1px solid black;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        #btSend:hover {
+            background-color: #648cfa;
+        }
+        #qtdrifas {
+            padding: 4px 20px;
+        }
+        #premios {
+            text-align: justify;
+            margin: 3px auto;
+        }
     </style>
 </head>
     <body>
@@ -68,11 +103,11 @@
         </div>
         <div class="loader" id="loader"></div>
         <div id="info">
-            <label>Nome do comprador:</label><br>
-            <input type="text" id="nome" placeholder="Digite Seu Nome"/><br>
-            <label>Telefone:</label><br>
-            <input type="tel" id="telefone" placeholder="(00) 00000-0000" title="Digite um número de telefone válido: (00) 00000-0000"/><br>
-            <label>Quantidade de rifas:</label><br>
+            <label for="nome">Nome do comprador:</label>
+            <input type="text" id="nome" placeholder="Digite Seu Nome"/>
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" placeholder="(00) 00000-0000" title="Digite um número de telefone válido: (00) 00000-0000"/>
+            <label for="qtdrifas">Quantidade de rifas:</label>
             <select id="qtdrifas" name="qtdrifas">
                 <option value=1>1</option>
                 <option value=2>2</option>
@@ -84,7 +119,7 @@
                 <option value=8>8</option>
                 <option value=9>9</option>
                 <option value=10>10</option>
-            </select><br>
+            </select>
             <button id="btSend" class="btZap" onclick="enviarFormulario()">Gerar Rifa</button>
         </div>
         <div id="rifa">
@@ -96,15 +131,25 @@
             <span>Comprovante: [XXXXX]</span>
         </div>
         <div id="base">
-            <span>Estamos dando continuidade a companha em forma de rifa,</span><br>
-            <span>pois o valor tratamento é de R$ 130.000,00 e ainda falta muito.</span><br>
-            <span>para a gente conseguir. Seguimos na luta!</span><br><br>
-            <span>Serão feitos vários sorteios com os seguintes prêmios:</span><br>
-            <span>Data do sorteio: 05/08/2023 sábado.</span><br>
-            <span>1 - Argola de ouro 24k:<br>
-                2 - ?????<br>
-                3 - ?????<br>
-                4 - ?????</span><br>
+            <span>Estamos dando continuidade a companha em forma de rifa, pois o valor do tratamento é de R$ 130.000,00 e ainda falta muito para a gente conseguir. Seguimos na luta!</span><br>
+            <span>Data do sorteio: 29/09/2023 sábado.</span><br>
+            <span>Serão feitos vários sorteios com os seguintes prêmios:</span>
+            <ol id="premios">
+                <li>Argola de ouro 24k</li>
+                <li>Colcha Queen (3 peças)</li>
+                <li>Perfume Lune (Natura)</li>
+                <li>Perfume Kaiak (Natura)</li>
+                <li>Kit Tododia (Natura)</li>
+                <li>Kit masculino (Natura)</li>
+                <li>2 Caixas de Sabonete (Natura)</li>
+                <li>Panela de Pressão</li>
+                <li>Conjunto de Talheres</li>
+                <li>Garrafa de Café</li>
+                <li>Marinex</li>
+                <li>Poncheira Térmica</li>
+                <li>Kit de Cordéis (Autores da Terra)</li>
+                <li>Livro de Crônicas de Nailson</li>
+            </ol>
             <span>Agradecemos muito por sua contribuição!</span>
         </div>
     </body>
