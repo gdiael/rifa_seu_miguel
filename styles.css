@@ -1,0 +1,130 @@
+:root {
+    --espac: 3px;
+}
+body {
+    font-family: Arial;
+    background-color: #F6F8F7;
+    align-items: center;
+    text-align: center;
+    background-image: url("background.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+label {
+    margin: var(--espac);
+}
+input {
+    border: 1px solid black;
+    outline: none;
+    padding: calc(2 * var(--espac));
+    margin: var(--espac);
+}
+#titulo {
+    text-align: center;
+    padding: 10px;
+}
+#tabela {
+    /* text-align: center; */
+    /* align-content: center; */
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(10, minmax(45px, 1fr));
+    gap: var(--espac);
+    width: 95%;
+    max-width: 600px;
+    max-height: 300px;
+    overflow: auto;
+    margin: 4px auto;
+    border: 3px solid #2f00ff;
+    border-radius: 10px;
+}
+.loader {
+    margin: 15px;
+    padding: 7px;
+    display: inline-block;
+    border: 7px solid #EAF0F6;
+    border-radius: 50%;
+    border-top: 7px solid #FF7A59;
+    width: 70px;
+    height: 70px;
+    animation: spinner 4s linear infinite;
+}
+.free, .frozen, .sold {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+}
+.free {
+    background-color: #5df35d;
+}
+.frozen {
+    background-color: #c9c9ca;
+}
+.sold {
+    background-color: #ff0000;
+}
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#base {
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+#info {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+#rifa {
+    background-color: white;
+    align-items: center;
+    text-align: center;
+    border-style: solid;
+    border-width: thin;
+    width: fit-content;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+}
+#btSend {
+    width: 150px;
+    font-size: 1rem;
+    background-color: #779afa;
+    padding: calc(2 * var(--espac));
+    margin: calc(2 * var(--espac));
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+}
+#btSend:hover {
+    background-color: #648cfa;
+}
+#premios {
+    text-align: justify;
+    margin: 3px auto;
+}
+
+.pop-up-escondido {
+    display: none;
+    position: fixed;
+    font-size: 1rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px #00000033;
+}
