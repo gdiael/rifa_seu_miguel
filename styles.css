@@ -13,11 +13,13 @@ body {
 label {
     margin: var(--espac);
 }
-input {
+input, #numrifa {
     border: 1px solid black;
     outline: none;
     padding: calc(2 * var(--espac));
     margin: var(--espac);
+    min-width: 210px;
+    width: auto;
 }
 #titulo {
     text-align: center;
@@ -44,12 +46,12 @@ input {
     display: inline-block;
     border: 7px solid #EAF0F6;
     border-radius: 50%;
-    border-top: 7px solid #FF7A59;
+    border-top: 7px solid #007a10;
     width: 70px;
     height: 70px;
     animation: spinner 4s linear infinite;
 }
-.free, .frozen, .sold {
+.free, .frozen, .sold, .btnSel {
     width: 100%;
     height: auto;
     border-radius: 50%;
@@ -63,6 +65,9 @@ input {
 }
 .free {
     background-color: #5df35d;
+}
+.btnSel {
+    background-color: #3714d4;
 }
 .frozen {
     background-color: #c9c9ca;
@@ -94,9 +99,27 @@ input {
     border-style: solid;
     border-width: thin;
     width: fit-content;
-    display: inline-block;
-    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
     padding: 10px;
+    max-width: 600px;
+}
+#rifaTitulo {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+#rifaSubtitulo {
+    margin: 0.8rem auto;
+}
+#rifasNumeros {
+    font-weight: bold;
+    color: red;
+    margin: 0.4rem auto;
+}
+#rifasComprov {
+    font-weight: bold;
+    margin: 0.3rem auto;
 }
 #btSend {
     width: 150px;
@@ -127,4 +150,34 @@ input {
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: 0 0 10px #00000033;
+}
+
+button.btPix {
+    background-color: #20b4ee;
+    width: 250px;
+    height: auto;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    border-radius: 6px;
+    margin: 6px auto;
+    cursor: pointer;
+}
+
+button.btZap {
+    background-color: #20ee20;
+    width: 250px;
+    height: auto;
+    font-size: 1em;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    border-radius: 6px;
+    margin: 6px auto;
+    cursor: pointer;
 }
