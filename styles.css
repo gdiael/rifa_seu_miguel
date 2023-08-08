@@ -80,11 +80,13 @@ input, #numrifa {
     100% { transform: rotate(360deg); }
 }
 #base {
+    background-color: #c9c9ca5d;
     align-items: center;
     text-align: center;
     width: 95%;
     max-width: 500px;
-    margin: 0 auto;
+    margin: 0.6rem auto;
+    padding: 0.6rem;
 }
 #info {
     align-items: center;
@@ -169,6 +171,21 @@ button.btPix {
 
 button.btZap {
     background-color: #20ee20;
+    width: 250px;
+    height: auto;
+    font-size: 1em;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    border-radius: 6px;
+    margin: 6px auto;
+    cursor: pointer;
+}
+
+button.again {
+    background-color: #86e9ff5e;
     width: 250px;
     height: auto;
     font-size: 1em;

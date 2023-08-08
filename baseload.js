@@ -1,15 +1,30 @@
 const appUrl = 'https://script.google.com/macros/s/AKfycbwm6FbHxj-8uSZ9ATEIzC6iDPz0sc2uZbRSJBW0B2_x_o-ARbVqWVNg_t_4BboZRg6L/exec'
 
+const appUnicCode = 'Rifa_Seu_Miguel_V01';
+
 var selectedNumbers = [];
 
-$(document).ready(function() {
+$(document).ready(startUpFunc);
+
+function startUpFunc() {
+    let rifaRef = localStorage.getItem(appUnicCode);
     $("#telefone").inputmask("(99) 99999-9999");
-    $('#loader').hide();
-    $('#rifa').hide();
-    $('#tabela').hide();
     $('#numrifa').prop("disabled", true);
-    getNumbersInfo();
-});
+    $('#loader').hide();
+    $('#tabela').hide();
+    if(rifaRef == null) {
+        $('#info').show();
+        $('#rifa').hide();
+        $('#buyAgainBtn').hide();
+        getNumbersInfo();
+    } else {
+        $('#info').hide();
+        $('#rifa').show();
+        $('#buyAgainBtn').show();
+        let dados = JSON.parse(rifaRef);
+        rifaConfirmation(dados.nome, dados.telefone, dados.numeros, dados.codigos);
+    }
+}
 
 function stopLoad() {
     $('#rifa').show();
@@ -50,6 +65,11 @@ function btPixClick() {
     });
 }
 
+function btAgainClick() {
+    rifaReset();
+    startUpFunc();
+}
+
 function enviarFormulario() {
     var nome = $("#nome").val();
     var telefone = $("#telefone").val();
@@ -87,20 +107,34 @@ function enviarFormulario() {
     })
     .then(response => response.json())
     .then(data => {
-        replaceKey('rifaCompra', '[MMMMM]', nome);
-        replaceKey('rifaCompra', '[TTTTT]', telefone);
-        replaceKey('rifasQuanti', '[QQQQQ]', selectedNumbers.length);
-        let rifaNumbersTxt = ((selectedNumbers.length > 1) ? 'Rifas Nº: ' : 'Rifa Nº: ') + selectedNumbers.join(', ') + '.';
-        replaceKey('rifasNumeros', '[CCCCC]', rifaNumbersTxt);
-        let rifaCodes = ((selectedNumbers.length > 1) ? 'Códigos: ' : 'Código: ') +  data.codes.join(', ') + '.';
-        replaceKey('rifasComprov', '[XXXXX]', rifaCodes);
-
+        rifaConfirmation(nome, telefone, selectedNumbers, data.codes);
+        rifaSave(nome, telefone, selectedNumbers, data.codes);
+        $('#buyAgainBtn').show();
         stopLoad();
     })
     .catch(error => {
         console.error("Erro na solicitação:", error);
         stopLoad();
     });
+}
+
+function rifaConfirmation(nome, telefone, numeros, codigos) {
+    replaceKey('rifaCompra', '[MMMMM]', nome);
+    replaceKey('rifaCompra', '[TTTTT]', telefone);
+    replaceKey('rifasQuanti', '[QQQQQ]', numeros.length);
+    let rifaNumbersTxt = ((numeros.length > 1) ? 'Rifas Nº: ' : 'Rifa Nº: ') + numeros.join(', ') + '.';
+    replaceKey('rifasNumeros', '[CCCCC]', rifaNumbersTxt);
+    let rifaCodes = ((numeros.length > 1) ? 'Códigos: ' : 'Código: ') +  codigos.join(', ') + '.';
+    replaceKey('rifasComprov', '[XXXXX]', rifaCodes);
+}
+
+function rifaSave(nome, telefone, numeros, codigos) {
+    let dados = {nome: nome, telefone: telefone, numeros: numeros, codigos: codigos};
+    localStorage.setItem(appUnicCode, JSON.stringify(dados));
+}
+
+function rifaReset() {
+    localStorage.removeItem(appUnicCode);
 }
 
 function replaceKey(elementId, key, txt) {
