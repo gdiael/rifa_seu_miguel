@@ -80,7 +80,7 @@ input, #numrifa {
     100% { transform: rotate(360deg); }
 }
 #base {
-    background-color: #c9c9ca5d;
+    background-color: #86e9ff5e;
     align-items: center;
     text-align: center;
     width: 95%;
@@ -185,7 +185,7 @@ button.btZap {
 }
 
 button.again {
-    background-color: #86e9ff5e;
+    background-color: #86e9ff;
     width: 250px;
     height: auto;
     font-size: 1em;
