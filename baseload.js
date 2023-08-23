@@ -168,6 +168,10 @@ function updateTable(jsonData) {
         tabela.appendChild(buttonFactory(i, status));
     }
     $('#tabela').show();
+    let alturaLinha = document.getElementById("button_500").clientHeight;
+    let firstLine = 11;
+    let desloc = alturaLinha * (firstLine - 1);
+    tabela.scrollTop = desloc;
 }
 
 function buttonFactory(number, status) {
